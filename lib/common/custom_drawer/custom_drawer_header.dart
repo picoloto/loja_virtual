@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/models/user_manager.dart';
+import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/login/login_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:provider/provider.dart';
