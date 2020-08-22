@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      lazy: false,
       create: (_) => UserManager(),
       child: MaterialApp(
         title: 'Loja do Leandro',
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-home: BaseScreen(),
+        home: BaseScreen(),
 //        initialRoute: '/base',
 //        onGenerateRoute: (settings) {
 //          switch (settings.name) {

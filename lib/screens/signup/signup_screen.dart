@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/loading_for_button/loading_for_button.dart';
 import 'package:loja_virtual/models/user.dart';
 import 'package:loja_virtual/models/user_manager.dart';
+import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
                 shrinkWrap: true,
                 children: <Widget>[
                   TextFormField(
-//                enabled: !userManager.loading,
+                    enabled: !userManager.loading,
                     autocorrect: false,
                     validator: (nome) => _validaNome(nome),
                     decoration: const InputDecoration(
@@ -42,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
-//                enabled: !userManager.loading,
+                    enabled: !userManager.loading,
                     keyboardType: TextInputType.emailAddress,
                     autocorrect: false,
                     validator: (email) => _validaEmail(email),
@@ -54,7 +55,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
-//                enabled: !userManager.loading,
+                    enabled: !userManager.loading,
                     autocorrect: false,
                     obscureText: true,
                     validator: (senha) => _validaSenha(senha),
@@ -66,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
-//                enabled: !userManager.loading,
+                    enabled: !userManager.loading,
                     autocorrect: false,
                     obscureText: true,
                     validator: (confirmacaoSenha) =>
@@ -84,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
                     child: RaisedButton(
                       onPressed: userManager.loading
                           ? null
-                          : () => _cadastrar(userManager),
+                          : () => _cadastrar(userManager, context),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       color: colorPrimary,
@@ -135,7 +136,7 @@ class SignUpScreen extends StatelessWidget {
     return null;
   }
 
-  void _cadastrar(UserManager userManager) {
+  void _cadastrar(UserManager userManager, BuildContext context) {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
 
@@ -150,8 +151,7 @@ class SignUpScreen extends StatelessWidget {
       userManager.signUp(
           user: user,
           onSuccess: () {
-            debugPrint('Sucesso');
-            // TODO FECHAR TELA DE LOGIN
+            navigatorPop(context);
           },
           onFail: (e) {
             scaffoldKey.currentState.showSnackBar(SnackBar(

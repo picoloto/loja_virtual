@@ -3,6 +3,7 @@ import 'package:loja_virtual/common/loading_for_button/loading_for_button.dart';
 import 'package:loja_virtual/models/user.dart';
 import 'package:loja_virtual/models/user_manager.dart';
 import 'package:loja_virtual/screens/signup/signup_screen.dart';
+import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
 import 'package:provider/provider.dart';
 
@@ -21,13 +22,13 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Entrar', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         centerTitle: true,
         actions: [
           FlatButton(
             //onPressed: () => Navigator.of(context).pushReplacementNamed('/signup');
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => SignUpScreen())),
+            onPressed: () => navigatorPush(context, SignUpScreen()),
             child: const Text('CRIAR CONTA'),
           )
         ],
@@ -79,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                       child: RaisedButton(
                         onPressed: userManager.loading
                             ? null
-                            : () => login(userManager),
+                            : () => _login(userManager, context),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                         color: colorPrimary,
@@ -104,7 +105,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void login(UserManager userManager) {
+  void _login(UserManager userManager, BuildContext context) {
     if (formKey.currentState.validate()) {
       final User user =
           User(email: emailController.text, password: senhaController.text);
@@ -117,7 +118,7 @@ class LoginScreen extends StatelessWidget {
             ));
           },
           onSuccess: () {
-            // TODO FECHAR TELA DE LOGIN
+            navigatorPop(context);
           });
     }
   }
