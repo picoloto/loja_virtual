@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/loading_for_button/loading_for_button.dart';
-import 'file:///C:/Users/picol/AndroidStudioProjects/loja_virtual/lib/models/user/user.dart';
-import 'file:///C:/Users/picol/AndroidStudioProjects/loja_virtual/lib/models/user/user_manager.dart';
+import 'package:loja_virtual/models/user/user.dart';
+import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,11 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('Criar conta'),
+        title: const Text('Criar conta', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0,
+        centerTitle: true,
       ),
       body: Center(
         child: Container(

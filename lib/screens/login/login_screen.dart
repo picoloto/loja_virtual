@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/loading_for_button/loading_for_button.dart';
-import 'file:///C:/Users/picol/AndroidStudioProjects/loja_virtual/lib/models/user/user.dart';
-import 'file:///C:/Users/picol/AndroidStudioProjects/loja_virtual/lib/models/user/user_manager.dart';
+import 'package:loja_virtual/models/user/user.dart';
+import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/signup/signup_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
