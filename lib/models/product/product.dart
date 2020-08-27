@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/product/product_version.dart';
 
-class Product extends ChangeNotifier{
+class Product extends ChangeNotifier {
   Product.fromDocument(DocumentSnapshot document) {
     id = document.documentID;
     name = document['name'] as String;
@@ -20,18 +20,29 @@ class Product extends ChangeNotifier{
   List<ProductVersion> versions;
 
   ProductVersion _selectedVersion;
+
   ProductVersion get selectedVersion => _selectedVersion;
-  set selectedVersion(ProductVersion val){
+
+  set selectedVersion(ProductVersion val) {
     _selectedVersion = val;
     notifyListeners();
   }
 
   int get totalStock {
     int stock = 0;
-    for(final version in versions){
+    for (final version in versions) {
       stock += version.stock;
     }
     return stock;
   }
+
   bool get hasStock => totalStock > 0;
+
+  ProductVersion findVersion(String name) {
+    try {
+      return versions.firstWhere((e) => e.name == name);
+    } catch (e) {
+      return null;
+    }
+  }
 }

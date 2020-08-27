@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/models/cart/cart_manager.dart';
 import 'package:loja_virtual/models/product/product_manager.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/base/base_screen.dart';
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ProductManager(),
           lazy: false,
+        ),
+        Provider(
+          create: (_) => CartManager(),
+          lazy: false,
         )
       ],
       child: MaterialApp(
@@ -28,18 +33,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+//          scaffoldBackgroundColor: Color.fromARGB(255, 240, 241, 245)
         ),
         home: BaseScreen(),
-//        initialRoute: '/base',
-//        onGenerateRoute: (settings) {
-//          switch (settings.name) {
-//            case '/signup':
-//              return MaterialPageRoute(builder: (_) => SignUpScreen());
-//            case '/base':
-//            default:
-//              return MaterialPageRoute(builder: (_) => BaseScreen());
-//          }
-//        },
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/models/cart/cart_manager.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/screens/cart/cart_screen.dart';
 import 'package:loja_virtual/screens/login/login_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +113,8 @@ class ProductScreen extends StatelessWidget {
             ? null
             : () {
                 if (userManager.isLoggedIn) {
-                  // TODO ADICIONAR AO CARRINHO
+                  context.read<CartManager>().addToCart(product);
+                  navigatorPush(context, CartScreen());
                 } else {
                   navigatorPush(context, LoginScreen());
                 }
