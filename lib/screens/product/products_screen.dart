@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
 import 'package:loja_virtual/models/product/product_manager.dart';
+import 'package:loja_virtual/screens/cart/cart_screen.dart';
 import 'package:loja_virtual/screens/product/components/product_list_tile.dart';
+import 'package:loja_virtual/utils/navigator.dart';
 import 'package:provider/provider.dart';
 
 import 'components/search_bar.dart';
@@ -21,7 +23,11 @@ class ProductsScreen extends StatelessWidget {
             return !manager.isSearching
                 ? _searchIcon(manager)
                 : _closeSearchIcon(manager);
-          })
+          }),
+          IconButton(
+            onPressed: () => navigatorPush(context, CartScreen()),
+            icon: const Icon(Icons.shopping_cart),
+          ),
         ],
       ),
       body: Consumer<ProductManager>(builder: (_, manager, __) {
