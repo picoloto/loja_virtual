@@ -1,8 +1,12 @@
+const modelName = 'name';
+const modelPrice = 'price';
+const modelStock = 'stock';
+
 class ProductVersion {
   ProductVersion.fromMap(Map<String, dynamic> map) {
-    name = map['name'] as String;
-    price = map['price'] as num;
-    stock = map['stock'] as int;
+    name = map[modelName] as String;
+    price = map[modelPrice] as num;
+    stock = map[modelStock] as int;
   }
 
   String name;
