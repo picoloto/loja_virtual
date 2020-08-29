@@ -7,13 +7,13 @@ class SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ProductManager>(builder: (_, manager, __) {
       return TextFormField(
-        cursorColor: Colors.white,
+        cursorColor: Colors.black,
         autofocus: true,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
+        style: const TextStyle(color: Colors.black, fontSize: 18),
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: 'Digite para pesquisar...',
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.black),
         ),
         onChanged: (text) {
           manager.search = text;

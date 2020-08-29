@@ -16,8 +16,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorPrimary = Theme.of(context).primaryColor;
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(

@@ -17,8 +17,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorPrimary = Theme.of(context).primaryColor;
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -29,7 +27,6 @@ class LoginScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           FlatButton(
-            //onPressed: () => Navigator.of(context).pushReplacementNamed('/signup');
             onPressed: () => navigatorPush(context, SignUpScreen()),
             child: const Text('CRIAR CONTA'),
           )

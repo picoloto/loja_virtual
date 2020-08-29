@@ -34,8 +34,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          primaryTextTheme: const TextTheme(
+              headline6: TextStyle(color: Colors.black),
+              button: TextStyle(color: Colors.black)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-//          scaffoldBackgroundColor: Color.fromARGB(255, 240, 241, 245)
+          appBarTheme: const AppBarTheme(
+            color: Colors.white24,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
         ),
         home: BaseScreen(),
       ),
