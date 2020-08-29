@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/common/loading_for_button/loading_for_button.dart';
-import 'package:loja_virtual/models/user.dart';
-import 'package:loja_virtual/models/user_manager.dart';
+import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
+import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
+import 'package:loja_virtual/common/loading_from_button.dart';
+import 'package:loja_virtual/models/user/user.dart';
+import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/signup/signup_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
@@ -15,8 +17,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorPrimary = Theme.of(context).primaryColor;
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -27,7 +27,6 @@ class LoginScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           FlatButton(
-            //onPressed: () => Navigator.of(context).pushReplacementNamed('/signup');
             onPressed: () => navigatorPush(context, SignUpScreen()),
             child: const Text('CRIAR CONTA'),
           )
@@ -75,26 +74,14 @@ class LoginScreen extends StatelessWidget {
                         child: const Text('Esqueci minha senha'),
                       ),
                     ),
-                    SizedBox(
-                      height: 44,
-                      child: RaisedButton(
-                        onPressed: userManager.loading
-                            ? null
-                            : () => _login(userManager, context),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        color: colorPrimary,
-                        textColor: Colors.white,
-                        disabledColor:
-                            Theme.of(context).primaryColor.withAlpha(120),
-                        child: userManager.loading
-                            ? LoadingForButton()
-                            : const Text(
-                                'Entrar',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                      ),
-                    )
+                    CustomRaisedButton(
+                      onPressed: userManager.loading
+                          ? null
+                          : () => _login(userManager, context),
+                      child: userManager.loading
+                          ? LoadingFromButton()
+                          : const CustomTextFromRaisedButton('Entrar'),
+                    ),
                   ],
                 );
               },
@@ -118,7 +105,7 @@ class LoginScreen extends StatelessWidget {
             ));
           },
           onSuccess: () {
-            navigatorPop(context);
+            navigatorPop(context: context);
           });
     }
   }

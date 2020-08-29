@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:loja_virtual/models/user.dart';
+import 'package:loja_virtual/models/user/user.dart';
+
 import 'package:loja_virtual/utils/firebase_errors.dart';
 
 class UserManager extends ChangeNotifier {
