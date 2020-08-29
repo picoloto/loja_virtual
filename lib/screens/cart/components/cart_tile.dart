@@ -21,7 +21,7 @@ class CartTile extends StatelessWidget {
               SizedBox(
                 height: 80,
                 width: 80,
-                child: Image.network(cartProduct.product.images.first),
+                child: Image.network(cartProduct.product.images.first, fit: BoxFit.cover),
               ),
               Expanded(
                 child: Padding(

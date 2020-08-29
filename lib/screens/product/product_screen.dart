@@ -1,6 +1,8 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
+import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/models/cart/cart_manager.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
@@ -106,46 +108,27 @@ class ProductScreen extends StatelessWidget {
 
   Widget _botaoAdicionarAoCarrinho(
       UserManager userManager, BuildContext context, Color primaryColor) {
-    return SizedBox(
-      height: 44,
-      child: RaisedButton(
-        onPressed: product.selectedVersion == null
-            ? null
-            : () {
-                if (userManager.isLoggedIn) {
-                  context.read<CartManager>().addToCart(product);
-                  navigatorPush(context, CartScreen());
-                } else {
-                  navigatorPush(context, LoginScreen());
-                }
-              },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: primaryColor,
-        textColor: Colors.white,
-        disabledColor: primaryColor.withAlpha(120),
-        child: Text(
-          userManager.isLoggedIn
-              ? 'ADICIONAR AO CARRINHO'
-              : 'ENTRE PARA COMPRAR',
-          style: const TextStyle(fontSize: 16),
-        ),
-      ),
+    return CustomRaisedButton(
+      onPressed: product.selectedVersion == null
+          ? null
+          : () {
+              if (userManager.isLoggedIn) {
+                context.read<CartManager>().addToCart(product);
+                navigatorPush(context, CartScreen());
+              } else {
+                navigatorPush(context, LoginScreen());
+              }
+            },
+      child: CustomTextFromRaisedButton(userManager.isLoggedIn
+          ? 'ADICIONAR AO CARRINHO'
+          : 'ENTRE PARA COMPRAR'),
     );
   }
 
   Widget _botaoSemEstoque() {
-    return SizedBox(
-      height: 44,
-      child: RaisedButton(
-        onPressed: null,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        disabledColor: Colors.red,
-        disabledTextColor: Colors.white,
-        child: const Text(
-          'PRODUTO SEM ESTOQUE',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
+    return const CustomRaisedButton(
+      onPressed: null,
+      child: CustomTextFromRaisedButton('PRODUTO SEM ESTOQUE'),
     );
   }
 }

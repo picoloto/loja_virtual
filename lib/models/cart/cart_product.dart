@@ -27,10 +27,10 @@ class CartProduct extends ChangeNotifier {
     quantity = document.data[modelQuantity] as int;
     version = document.data[modelVersion] as String;
 
-    firestore
-        .document('products/$productId')
-        .get()
-        .then((value) => product = Product.fromDocument(value));
+    firestore.document('products/$productId').get().then((value) {
+      product = Product.fromDocument(value);
+      notifyListeners();
+    });
   }
 
   ProductVersion get productVersion {

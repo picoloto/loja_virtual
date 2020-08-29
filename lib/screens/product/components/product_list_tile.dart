@@ -15,13 +15,14 @@ class ProductListTile extends StatelessWidget {
       child: InkWell(
         onTap: () => navigatorPush(context, ProductScreen(product)),
         child: Container(
-          height: 160,
+          height: 100,
           padding: const EdgeInsets.all(8),
           child: Row(
             children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: Image.network(product.images.first),
+              SizedBox(
+                height: 80,
+                width: 80,
+                child: Image.network(product.images.first, fit: BoxFit.cover),
               ),
               Expanded(
                 child: ListTile(
