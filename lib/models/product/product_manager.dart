@@ -13,12 +13,14 @@ class ProductManager extends ChangeNotifier {
   bool _isSearching = false;
 
   bool get isSearching => _isSearching;
+
   String get search => _search;
 
-  set isSearching (bool val){
+  set isSearching(bool val) {
     _isSearching = val;
     notifyListeners();
   }
+
   set search(String value) {
     _search = value;
     notifyListeners();
@@ -41,5 +43,13 @@ class ProductManager extends ChangeNotifier {
     allProducts =
         snapshot.documents.map((e) => Product.fromDocument(e)).toList();
     notifyListeners();
+  }
+
+  Product findProductById(String product) {
+    try {
+      return allProducts.firstWhere((e) => e.id == product);
+    } catch (e) {
+      return null;
+    }
   }
 }

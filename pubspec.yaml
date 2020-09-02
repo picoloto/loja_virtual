@@ -33,6 +33,8 @@ dependencies:
   firebase_storage:
   provider:
   carousel_pro:
+  flutter_staggered_grid_view:
+  transparent_image:
 
 dev_dependencies:
   flutter_test:
