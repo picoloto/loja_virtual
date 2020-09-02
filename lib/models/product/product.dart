@@ -2,13 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/product/product_version.dart';
 
+const modelName = 'name';
+const modelDescription = 'description';
+const modelImages = 'images';
+const modelVersions = 'versions';
+
 class Product extends ChangeNotifier {
   Product.fromDocument(DocumentSnapshot document) {
     id = document.documentID;
-    name = document['name'] as String;
-    description = document['description'] as String;
-    images = List<String>.from(document.data['images'] as List<dynamic>);
-    versions = (document.data['versions'] as List<dynamic> ?? [])
+    name = document[modelName] as String;
+    description = document[modelDescription] as String;
+    images = List<String>.from(document.data[modelImages] as List<dynamic>);
+    versions = (document.data[modelVersions] as List<dynamic> ?? [])
         .map((e) => ProductVersion.fromMap(e as Map<String, dynamic>))
         .toList();
   }
