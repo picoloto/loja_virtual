@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/product/product.dart';
+import 'package:loja_virtual/models/product/product_constants.dart';
 
 class ProductManager extends ChangeNotifier {
   ProductManager() {
@@ -39,7 +40,7 @@ class ProductManager extends ChangeNotifier {
 
   Future<void> _loadAllProducts() async {
     final QuerySnapshot snapshot =
-        await firestore.collection('products').getDocuments();
+        await firestore.collection(productCollection).getDocuments();
     allProducts =
         snapshot.documents.map((e) => Product.fromDocument(e)).toList();
     notifyListeners();
@@ -51,5 +52,11 @@ class ProductManager extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  void update(Product product) {
+    allProducts.removeWhere((element) => element.id == product.id);
+    allProducts.add(product);
+    notifyListeners();
   }
 }

@@ -17,12 +17,16 @@ class ProductVersion {
 
   bool get hasStock => stock > 0;
 
+  ProductVersion clone() {
+    return ProductVersion(name: name, price: price, stock: stock);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {modelName: name, modelPrice: price, modelStock: stock};
+  }
+
   @override
   String toString() {
     return 'ProductVersion{name: $name, price: $price, stock: $stock}';
-  }
-
-  ProductVersion clone() {
-    return ProductVersion(name: name, price: price, stock: stock);
   }
 }

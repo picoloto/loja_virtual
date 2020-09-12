@@ -17,6 +17,7 @@ class ImagesForm extends StatelessWidget {
       initialValue: List.from(product.images),
       validator: (images) =>
           images.isEmpty ? 'Insira ao menos uma imagem' : null,
+      onSaved: (images) => product.newImages = images,
       builder: (state) {
         return Container(
           height: 450,

@@ -26,7 +26,7 @@ class EditProductVersion extends StatelessWidget {
                   labelText: 'Sigla',
                   border: OutlineInputBorder(),
                   isDense: true),
-              validator: (name) => name.isEmpty ? 'Inválido' : null,
+              validator: (name) => name.isEmpty || name.length > 1 ? 'Inválido' : null,
               onChanged: (name) => version.name = name,
             ),
           ),

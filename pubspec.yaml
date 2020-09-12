@@ -39,6 +39,7 @@ dependencies:
   faker:
   image_picker:
   image_cropper:
+  uuid:
 
 dev_dependencies:
   flutter_test:
