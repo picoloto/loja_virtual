@@ -28,7 +28,7 @@ class ProductListTile extends StatelessWidget {
                 child: ListTile(
                   title: Text(product.name),
                   subtitle: const Text('A partir de'),
-                  trailing: Text('R\$ 19.99',
+                  trailing: Text('R\$ ${product.basePrice.toStringAsFixed(2)}',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

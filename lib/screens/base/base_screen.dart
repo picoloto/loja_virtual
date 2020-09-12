@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
 import 'package:loja_virtual/models/page_manager.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/screens/admin_users/admin_user_list_screen.dart';
 import 'package:loja_virtual/screens/home/home_screen.dart';
-import 'package:loja_virtual/screens/product/products_screen.dart';
+import 'package:loja_virtual/screens/product/product_list_screen.dart';
 import 'package:provider/provider.dart';
 
 class BaseScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class BaseScreen extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               HomeScreen(),
-              ProductsScreen(),
+              ProductListScreen(),
               Scaffold(
                 drawer: CustomDrawer(),
                 appBar: AppBar(title: const Text('Pedidos')),
@@ -31,10 +32,7 @@ class BaseScreen extends StatelessWidget {
               ),
               if (manager.adminEnabled)
                 ...[
-                  Scaffold(
-                    drawer: CustomDrawer(),
-                    appBar: AppBar(title: const Text('Usuários')),
-                  ),
+                  AdminUserListScreen(),
                   Scaffold(
                     drawer: CustomDrawer(),
                     appBar: AppBar(title: const Text('Pedidos')),

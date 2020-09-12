@@ -1,0 +1,3 @@
+enum PositionVersionEnum {
+  up, down
+}

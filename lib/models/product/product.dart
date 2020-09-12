@@ -8,6 +8,18 @@ const modelImages = 'images';
 const modelVersions = 'versions';
 
 class Product extends ChangeNotifier {
+  String id;
+  String name;
+  String description;
+  List<String> images;
+  List<ProductVersion> versions;
+  ProductVersion _selectedVersion;
+
+  Product({this.id, this.name, this.description, this.images, this.versions}) {
+    images = images ?? [];
+    versions = versions ?? [];
+  }
+
   Product.fromDocument(DocumentSnapshot document) {
     id = document.documentID;
     name = document[modelName] as String;
@@ -18,20 +30,9 @@ class Product extends ChangeNotifier {
         .toList();
   }
 
-  String id;
-  String name;
-  String description;
-  List<String> images;
-  List<ProductVersion> versions;
-
-  ProductVersion _selectedVersion;
-
   ProductVersion get selectedVersion => _selectedVersion;
 
-  set selectedVersion(ProductVersion val) {
-    _selectedVersion = val;
-    notifyListeners();
-  }
+  bool get hasStock => totalStock > 0;
 
   int get totalStock {
     int stock = 0;
@@ -41,7 +42,20 @@ class Product extends ChangeNotifier {
     return stock;
   }
 
-  bool get hasStock => totalStock > 0;
+  num get basePrice {
+    num lowest = double.infinity;
+    for (final version in versions) {
+      if (version.price < lowest && version.hasStock) {
+        lowest = version.price;
+      }
+    }
+    return lowest;
+  }
+
+  set selectedVersion(ProductVersion val) {
+    _selectedVersion = val;
+    notifyListeners();
+  }
 
   ProductVersion findVersion(String name) {
     try {
@@ -49,5 +63,15 @@ class Product extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  Product clone() {
+    return Product(
+      id: id,
+      name: name,
+      description: description,
+      images: List.from(images),
+      versions: versions.map((e) => e.clone()).toList(),
+    );
   }
 }

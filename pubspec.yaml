@@ -35,6 +35,10 @@ dependencies:
   carousel_pro:
   flutter_staggered_grid_view:
   transparent_image:
+  alphabet_list_scroll_view:
+  faker:
+  image_picker:
+  image_cropper:
 
 dev_dependencies:
   flutter_test:
