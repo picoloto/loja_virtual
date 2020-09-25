@@ -10,12 +10,22 @@ class Section {
   String type;
   List<SectionItem> items;
 
+  Section({this.name, this.type, this.items});
+
   Section.fromDocument(DocumentSnapshot document) {
     name = document.data[modelName] as String;
     type = document.data[modelType] as String;
     items = (document.data[modelItems] as List)
         .map((e) => SectionItem.fromMap(e as Map<String, dynamic>))
         .toList();
+  }
+
+  Section clone() {
+    return Section(
+      name: name,
+      type: type,
+      items: items.map((e) => e.clone()).toList(),
+    );
   }
 
   @override
