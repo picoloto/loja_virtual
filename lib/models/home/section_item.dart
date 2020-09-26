@@ -2,7 +2,7 @@ const modelImage = 'image';
 const modelProduct = 'product';
 
 class SectionItem {
-  String image;
+  dynamic image;
   String product;
 
   SectionItem({this.image, this.product});
