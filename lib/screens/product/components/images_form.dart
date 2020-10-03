@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/screens/product/components/image_source_sheet.dart';
 import 'package:loja_virtual/utils/navigator.dart';
@@ -85,7 +86,7 @@ class ImagesForm extends StatelessWidget {
       color: Colors.grey[200],
       child: IconButton(
         icon: const Icon(Icons.add_a_photo),
-        color: Theme.of(context).primaryColor,
+        color: appPrimaryColor(context),
         iconSize: 50,
         onPressed: () {
           showModalBottomSheet(

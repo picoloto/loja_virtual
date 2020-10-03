@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/models/home/home_manager.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/cart/cart_screen.dart';
@@ -36,6 +37,15 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           Consumer<HomeManager>(builder: (_, manager, __) {
+            if(manager.loading){
+              return SliverToBoxAdapter(
+                child: LinearProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(appPrimaryColor(context)),
+                  backgroundColor: Colors.transparent,
+                ),
+              );
+            }
+
             final List<Widget> children =
                 manager.sections.map<Widget>((e) => SectionList(e)).toList();
 
@@ -54,7 +64,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _editButton(
       BuildContext context, UserManager userManager, HomeManager homeManager) {
-    if (userManager.adminEnabled) {
+    if (userManager.adminEnabled && !homeManager.loading) {
       return homeManager.editing
           ? _popupMenu(context, userManager, homeManager)
           : IconButton(

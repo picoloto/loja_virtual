@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/screens/product/product_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
@@ -32,7 +33,7 @@ class ProductListTile extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor)),
+                          color: appPrimaryColor(context))),
                 ),
               ),
             ],

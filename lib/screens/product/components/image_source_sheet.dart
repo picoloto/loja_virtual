@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 
 class ImageSourceSheet extends StatelessWidget {
   ImageSourceSheet({this.onImageSelect});
@@ -12,7 +13,7 @@ class ImageSourceSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = appPrimaryColor(context);
     return BottomSheet(
       onClosing: () {},
       builder: (_) => ListView(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/models/cart/cart_manager.dart';
@@ -44,7 +45,7 @@ class PriceCard extends StatelessWidget {
                         TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                 Text('R\$ ${productsPrice.toStringAsFixed(2)}',
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 16)),
+                        color: appPrimaryColor(context), fontSize: 16)),
               ],
             ),
             const SizedBox(height: 12),

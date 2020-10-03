@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 
 class CustomLoaderRaisedButton extends StatelessWidget {
   @override
@@ -7,9 +8,9 @@ class CustomLoaderRaisedButton extends StatelessWidget {
       height: 52,
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        color: Theme.of(context).primaryColor,
+        color: appPrimaryColor(context),
         textColor: Colors.white,
-        disabledColor: Theme.of(context).primaryColor.withAlpha(176),
+        disabledColor: appPrimaryColor(context).withAlpha(176),
         disabledTextColor: Colors.white,
         onPressed: null,
         child: const CircularProgressIndicator(

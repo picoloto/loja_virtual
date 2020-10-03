@@ -16,23 +16,29 @@ class SectionHeader extends StatelessWidget {
     if (homeManager.editing) {
       return Padding(
         padding: const EdgeInsets.only(bottom: 8),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: TextFormField(
-                initialValue: section.name ?? '',
-                decoration: const InputDecoration(
-                    labelText: 'Título',
-                    border: OutlineInputBorder(),
-                    isDense: true),
-                onChanged: (text) => section.name = text,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    initialValue: section.name ?? '',
+                    decoration: const InputDecoration(
+                        labelText: 'Título',
+                        border: OutlineInputBorder(),
+                        isDense: true),
+                    onChanged: (text) => section.name = text,
+                  ),
+                ),
+                CustomIconButton(
+                  iconData: Icons.remove,
+                  color: Colors.black,
+                  onTap: () => homeManager.removeSection(section),
+                )
+              ],
             ),
-            CustomIconButton(
-              iconData: Icons.remove,
-              color: Colors.black,
-              onTap: () => homeManager.removeSection(section),
-            )
+            _errorSection(section),
           ],
         ),
       );
@@ -45,5 +51,18 @@ class SectionHeader extends StatelessWidget {
         ),
       );
     }
+  }
+
+  Widget _errorSection(Section section) {
+    print(section.error);
+    return section.error != null
+        ? Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(
+              section.error,
+              style: const TextStyle(color: Colors.red),
+            ),
+        )
+        : Container();
   }
 }

@@ -24,9 +24,4 @@ class ProductVersion {
   Map<String, dynamic> toMap() {
     return {modelName: name, modelPrice: price, modelStock: stock};
   }
-
-  @override
-  String toString() {
-    return 'ProductVersion{name: $name, price: $price, stock: $stock}';
-  }
 }

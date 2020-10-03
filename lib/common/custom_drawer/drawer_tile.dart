@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/models/page_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,7 @@ class DrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int curPage = context.watch<PageManager>().currentPage;
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = appPrimaryColor(context);
 
     return ListTile(
       leading: Icon(

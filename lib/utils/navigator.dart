@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-void navigatorPush(BuildContext context, Widget page) {
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
+Future<T> navigatorPush<T extends Object>(BuildContext context, Widget page) {
+  return Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
 }
 
 void navigatorPop({BuildContext context, dynamic params}){

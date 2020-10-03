@@ -148,15 +148,9 @@ class Product extends ChangeNotifier {
       productDescription: description,
       productVersions: versionMapFromList(),
     };
-    // modelImages
   }
 
   List<Map<String, dynamic>> versionMapFromList() {
     return versions.map((e) => e.toMap()).toList();
-  }
-
-  @override
-  String toString() {
-    return 'Product{id: $id, name: $name, description: $description, images: $images, versions: $versions, newImages: $newImages}';
   }
 }
