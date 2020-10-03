@@ -1,17 +1,27 @@
-const modelImage = 'image';
-const modelProduct = 'product';
+import 'package:loja_virtual/models/home/section_item_constants.dart';
 
 class SectionItem {
-  String image;
+  dynamic image;
   String product;
 
+  SectionItem({this.image, this.product});
+
   SectionItem.fromMap(Map<String, dynamic> map) {
-    image = map[modelImage] as String;
-    product = map[modelProduct] as String;
+    image = map[sectionItemImage] as String;
+    product = map[sectionItemProduct] as String;
   }
 
-  @override
-  String toString() {
-    return 'SectionItem{image: $image, product: $product}';
+  SectionItem clone() {
+    return SectionItem(
+      image: image,
+      product: product,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      sectionItemImage: image,
+      sectionItemProduct: product,
+    };
   }
 }

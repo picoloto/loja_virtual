@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
 
-class CustomRaisedButton extends StatelessWidget {
-  const CustomRaisedButton({this.child, this.onPressed});
-
-  final Widget child;
-  final VoidCallback onPressed;
-
+class CustomLoaderRaisedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,8 +12,10 @@ class CustomRaisedButton extends StatelessWidget {
         textColor: Colors.white,
         disabledColor: appPrimaryColor(context).withAlpha(176),
         disabledTextColor: Colors.white,
-        onPressed: onPressed,
-        child: child,
+        onPressed: null,
+        child: const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation(Colors.white),
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
+import 'package:loja_virtual/models/page_manager.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/login/login_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
@@ -30,6 +32,7 @@ class CustomDrawerHeader extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   if(userManager.isLoggedIn){
+                    context.read<PageManager>().setPage(0);
                     userManager.signOut();
                     navigatorPush(context, LoginScreen());
                   }else{
@@ -39,7 +42,7 @@ class CustomDrawerHeader extends StatelessWidget {
                 child: Text(
                   userManager.isLoggedIn ? 'Sair' : 'Entre ou Cadastre-se',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: appPrimaryColor(context),
                     fontSize: 16,
                   ),
                 ),

@@ -3,6 +3,8 @@ const modelPrice = 'price';
 const modelStock = 'stock';
 
 class ProductVersion {
+  ProductVersion({this.name, this.price, this.stock});
+
   ProductVersion.fromMap(Map<String, dynamic> map) {
     name = map[modelName] as String;
     price = map[modelPrice] as num;
@@ -15,8 +17,11 @@ class ProductVersion {
 
   bool get hasStock => stock > 0;
 
-  @override
-  String toString() {
-    return 'ProductVersion{name: $name, price: $price, stock: $stock}';
+  ProductVersion clone() {
+    return ProductVersion(name: name, price: price, stock: stock);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {modelName: name, modelPrice: price, modelStock: stock};
   }
 }

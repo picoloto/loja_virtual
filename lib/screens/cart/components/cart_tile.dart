@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/common/custom_icon_button.dart';
 import 'package:loja_virtual/models/cart/cart_product.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,7 @@ class CartTile extends StatelessWidget {
                   children: [
                     CustomIconButton(
                       iconData: Icons.add,
-                      color: Theme.of(context).primaryColor,
+                      color: appPrimaryColor(context),
                       onTap: cartProduct.increment,
                     ),
                     Text('${cartProduct.quantity}',
@@ -60,7 +61,7 @@ class CartTile extends StatelessWidget {
                           ? Icons.remove
                           : Icons.delete,
                       color: cartProduct.quantity > 1
-                          ? Theme.of(context).primaryColor
+                          ? appPrimaryColor(context)
                           : Colors.grey[600],
                       onTap: cartProduct.decrement,
                     ),
@@ -80,7 +81,7 @@ class CartTile extends StatelessWidget {
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor));
+              color: appPrimaryColor(context)));
     } else {
       return Text('Sem estoque suficiente',
           style: TextStyle(
