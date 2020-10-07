@@ -5,10 +5,15 @@ import 'package:loja_virtual/models/product/product_manager.dart';
 import 'package:loja_virtual/models/user/admin_user_manager.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/base/base_screen.dart';
+import 'package:loja_virtual/services/cepaberto_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
+
+  CepAbertoService()
+      .getAddressFromCep('85.502-340')
+      .then((value) => print(value));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<UserManager, AdminUserManager>(
           create: (_) => AdminUserManager(),
           update: (_, userManager, adminUserManager) =>
-          adminUserManager..updateUser(userManager),
+              adminUserManager..updateUser(userManager),
           lazy: false,
         )
       ],
