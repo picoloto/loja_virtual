@@ -1,14 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/cart/cart_product.dart';
+import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/user/user.dart';
 import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/services/cepaberto_service.dart';
 
 class CartManager extends ChangeNotifier {
   User user;
   List<CartProduct> items = [];
   num productsPrice = 0.0;
+  Address address;
 
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -78,5 +81,26 @@ class CartManager extends ChangeNotifier {
       }
     }
     return true;
+  }
+
+  Future<void> getAddress(String cep) async {
+    final cepAbertoService = CepAbertoService();
+
+    try {
+      final cepabertoEndereco = await cepAbertoService.getAddressFromCep(cep);
+      if (cepabertoEndereco != null) {
+        address = Address(
+            street: cepabertoEndereco.logradouro,
+            district: cepabertoEndereco.bairro,
+            zipCode: cepabertoEndereco.cep,
+            city: cepabertoEndereco.cidade.nome,
+            state: cepabertoEndereco.estado.sigla,
+            lat: cepabertoEndereco.latitude,
+            long: cepabertoEndereco.longitude);
+        notifyListeners();
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }

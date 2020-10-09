@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/models/cart/cart_manager.dart';
 import 'package:loja_virtual/screens/address/components/cep_input_field.dart';
+import 'package:provider/provider.dart';
 
 class AddressCard extends StatelessWidget {
   @override
@@ -8,13 +10,22 @@ class AddressCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('ENDEREÇO DE ENTREGA',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-            CepInputField()
-          ],
+        child: Consumer<CartManager>(
+          builder: (_, manager, __){
+            final address = manager.address;
+            print(address);
+
+            return Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('ENDEREÇO DE ENTREGA',
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                  CepInputField()
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

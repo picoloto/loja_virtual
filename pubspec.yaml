@@ -41,6 +41,7 @@ dependencies:
   image_cropper:
   uuid:
   dio:
+  brasil_fields:
 
 dev_dependencies:
   flutter_test:

@@ -10,10 +10,6 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
-
-  CepAbertoService()
-      .getAddressFromCep('85.502-340')
-      .then((value) => print(value));
 }
 
 class MyApp extends StatelessWidget {
