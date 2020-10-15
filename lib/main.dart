@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/models/cart/cart_manager.dart';
-import 'package:loja_virtual/models/home/home_manager.dart';
-import 'package:loja_virtual/models/product/product_manager.dart';
-import 'package:loja_virtual/models/user/admin_user_manager.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/manager/admin_user_manager.dart';
+import 'package:loja_virtual/manager/cart_manager.dart';
+import 'package:loja_virtual/manager/home_manager.dart';
+import 'package:loja_virtual/manager/product_manager.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/screens/base/base_screen.dart';
-import 'package:loja_virtual/services/cepaberto_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {

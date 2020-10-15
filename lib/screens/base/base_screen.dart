@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
-import 'package:loja_virtual/models/page_manager.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/manager/page_manager.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/screens/admin_users/admin_user_list_screen.dart';
 import 'package:loja_virtual/screens/home/home_screen.dart';
 import 'package:loja_virtual/screens/product/product_list_screen.dart';

@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/cart/cart_product.dart';
 import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/user/user.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/services/cepaberto_service.dart';
 
 class CartManager extends ChangeNotifier {
@@ -102,5 +102,10 @@ class CartManager extends ChangeNotifier {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void removeAddress() {
+    address = null;
+    notifyListeners();
   }
 }

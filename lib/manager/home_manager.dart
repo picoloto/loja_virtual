@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/home/section.dart';
-import 'package:loja_virtual/models/home/section_constants.dart';
+import 'package:loja_virtual/utils/const/section_constants.dart';
 
 class HomeManager extends ChangeNotifier {
   final Firestore firestore = Firestore.instance;

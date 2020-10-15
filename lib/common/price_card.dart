@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
-import 'package:loja_virtual/models/cart/cart_manager.dart';
+import 'package:loja_virtual/manager/cart_manager.dart';
+
 import 'package:provider/provider.dart';
 
 class PriceCard extends StatelessWidget {

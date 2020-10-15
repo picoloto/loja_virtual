@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/models/cart/cart_manager.dart';
+import 'package:loja_virtual/manager/cart_manager.dart';
+import 'package:loja_virtual/models/endereco/address.dart';
+import 'package:loja_virtual/screens/address/components/address_input_field.dart';
 import 'package:loja_virtual/screens/address/components/cep_input_field.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +13,8 @@ class AddressCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Consumer<CartManager>(
-          builder: (_, manager, __){
-            final address = manager.address;
+          builder: (_, manager, __) {
+            final address = manager.address ?? Address();
             print(address);
 
             return Form(
@@ -20,8 +22,10 @@ class AddressCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('ENDEREÇO DE ENTREGA',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                  CepInputField()
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                  CepInputField(address),
+                  AddressInputField(address),
                 ],
               ),
             );

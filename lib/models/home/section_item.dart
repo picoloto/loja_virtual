@@ -1,4 +1,6 @@
-import 'package:loja_virtual/models/home/section_item_constants.dart';
+
+
+import 'package:loja_virtual/utils/const/section_item_constants.dart';
 
 class SectionItem {
   dynamic image;
