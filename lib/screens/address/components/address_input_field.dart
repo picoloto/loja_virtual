@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:loja_virtual/common/custom_field_decoration.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
+import 'package:loja_virtual/manager/cart_manager.dart';
 import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:loja_virtual/utils/validators.dart';
+import 'package:provider/provider.dart';
 
 class AddressInputField extends StatelessWidget {
   const AddressInputField(this.address);
@@ -98,7 +100,13 @@ class AddressInputField extends StatelessWidget {
               ],
             ),
             CustomRaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                FormState formContext = Form.of(context);
+                if(formContext.validate()){
+                  formContext.save();
+                  context.read<CartManager>().setAddress(address);
+                }
+              },
               child: const CustomTextFromRaisedButton("Calcular Frete"),
             )
           ],

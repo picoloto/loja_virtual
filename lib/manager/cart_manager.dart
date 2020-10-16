@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/cart/cart_product.dart';
 import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/user/user.dart';
 import 'package:loja_virtual/services/cepaberto_service.dart';
+import 'package:loja_virtual/utils/const/aux_constants.dart';
 
 class CartManager extends ChangeNotifier {
   User user;
   List<CartProduct> items = [];
   num productsPrice = 0.0;
   Address address;
+  final Firestore firestore = Firestore.instance;
 
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -107,5 +110,28 @@ class CartManager extends ChangeNotifier {
   void removeAddress() {
     address = null;
     notifyListeners();
+  }
+
+  void setAddress(Address address) {
+    this.address = address;
+    calculateDelivery(address.lat, address.long);
+    // notifyListeners();
+  }
+
+  Future<void> calculateDelivery(double lat, double long) async {
+    final DocumentSnapshot doc = await firestore.document(auxDelivery).get();
+    final latStore = doc.data[auxDeliveryLat] as double;
+    final longStore = doc.data[auxDeliveryLong] as double;
+    final maxkmStore = doc.data[auxDeliveryMaxkm] as num;
+
+    double distance = distanceBetween(latStore, longStore, lat, long);
+    distance /= 1000;
+
+    print('distance $distance');
+    if(distance <= maxkmStore){
+
+    }else{
+
+    }
   }
 }

@@ -42,6 +42,7 @@ dependencies:
   uuid:
   dio:
   brasil_fields:
+  geolocator:
 
 dev_dependencies:
   flutter_test:

@@ -62,9 +62,7 @@ class CepInputField extends StatelessWidget {
               ),
             ),
             CustomIconButton(
-              onTap: () {
-                context.read<CartManager>().removeAddress();
-              },
+              onTap: () => context.read<CartManager>().removeAddress(),
               color: appPrimaryColor(context),
               iconData: Icons.edit,
               size: 20,

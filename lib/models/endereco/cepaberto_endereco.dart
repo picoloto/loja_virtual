@@ -14,7 +14,7 @@ class CepabertoEndereco {
       : altitude = map[cepabertoEnderecoAltitude] as double,
         cep = map[cepabertoEnderecoCep] as String,
         latitude = double.tryParse(map[cepabertoEnderecoLatitude] as String),
-        longitude = double.tryParse(map[cepabertoEnderecoLatitude] as String),
+        longitude = double.tryParse(map[cepabertoEnderecoLongitude] as String),
         logradouro = map[cepabertoEnderecoLogradouro] as String,
         bairro = map[cepabertoEnderecoBairro] as String,
         cidade = CepabertoCidade.fromMap(
