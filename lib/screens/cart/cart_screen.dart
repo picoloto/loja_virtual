@@ -35,7 +35,7 @@ class CartScreen extends StatelessWidget {
                 children: manager.items.map((e) => CartTile(e)).toList(),
               ),
               PriceCard(
-                buttonText: 'Continuar para Entrega',
+                buttonText: 'ENTREGA',
                 onPressed: !manager.isCartValid
                     ? null
                     : () => navigatorPush(context, AddressScreen()),
