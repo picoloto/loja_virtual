@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
-import 'package:loja_virtual/models/cart/cart_manager.dart';
+import 'package:loja_virtual/manager/cart_manager.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/product/product.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/cart/cart_screen.dart';
 import 'package:loja_virtual/screens/login/login_screen.dart';
 import 'package:loja_virtual/screens/product/edit_product_screen.dart';
@@ -109,6 +109,7 @@ class ProductScreen extends StatelessWidget {
                 navigatorPush(context, LoginScreen());
               }
             },
+      loading: false,
       child: CustomTextFromRaisedButton(userManager.isLoggedIn
           ? 'ADICIONAR AO CARRINHO'
           : 'ENTRE PARA COMPRAR'),
@@ -117,6 +118,7 @@ class ProductScreen extends StatelessWidget {
 
   Widget _botaoSemEstoque() {
     return const CustomRaisedButton(
+      loading: false,
       child: CustomTextFromRaisedButton('PRODUTO SEM ESTOQUE'),
     );
   }

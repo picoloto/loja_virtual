@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
+import 'package:loja_virtual/manager/product_manager.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/product/product.dart';
-import 'package:loja_virtual/models/product/product_manager.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/cart/cart_screen.dart';
 import 'package:loja_virtual/screens/product/components/product_list_tile.dart';
 import 'package:loja_virtual/screens/product/edit_product_screen.dart';

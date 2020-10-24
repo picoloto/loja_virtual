@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/common/loading_from_button.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/user/user.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/screens/signup/signup_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
@@ -75,12 +75,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     CustomRaisedButton(
-                      onPressed: userManager.loading
-                          ? null
-                          : () => _login(userManager, context),
-                      child: userManager.loading
-                          ? LoadingFromButton()
-                          : const CustomTextFromRaisedButton('Entrar'),
+                      onPressed:() => _login(userManager, context),
+                      loading: userManager.loading,
+                      child: const CustomTextFromRaisedButton('Entrar'),
                     ),
                   ],
                 );

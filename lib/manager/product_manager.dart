@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/product/product.dart';
-import 'package:loja_virtual/models/product/product_constants.dart';
+import 'package:loja_virtual/utils/const/product_constants.dart';
 
 class ProductManager extends ChangeNotifier {
   ProductManager() {

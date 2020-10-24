@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/common/loading_from_button.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/models/user/user.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:loja_virtual/utils/validators.dart';
 import 'package:provider/provider.dart';
@@ -85,12 +85,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   CustomRaisedButton(
-                    onPressed: userManager.loading
-                        ? null
-                        : () => _cadastrar(userManager, context),
-                    child: userManager.loading
-                        ? LoadingFromButton()
-                        : const CustomTextFromRaisedButton('Criar Conta'),
+                    onPressed: () => _cadastrar(userManager, context),
+                    loading: userManager.loading,
+                    child: const CustomTextFromRaisedButton('Criar Conta'),
                   )
                 ],
               );

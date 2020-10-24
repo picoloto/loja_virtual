@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/models/home/home_manager.dart';
+import 'package:loja_virtual/manager/home_manager.dart';
 import 'package:loja_virtual/models/home/section.dart';
 import 'package:loja_virtual/screens/home/components/add_section_tile_widget.dart';
 import 'package:loja_virtual/screens/home/components/section_header.dart';

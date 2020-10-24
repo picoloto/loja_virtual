@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
-import 'package:loja_virtual/models/page_manager.dart';
+import 'package:loja_virtual/manager/page_manager.dart';
+
 import 'package:provider/provider.dart';
 
 class DrawerTile extends StatelessWidget {

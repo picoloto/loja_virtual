@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
-import 'package:loja_virtual/models/page_manager.dart';
-import 'package:loja_virtual/models/user/user_manager.dart';
+import 'package:loja_virtual/manager/page_manager.dart';
+import 'package:loja_virtual/manager/user_manager.dart';
+
 import 'package:loja_virtual/screens/login/login_screen.dart';
 import 'package:loja_virtual/utils/navigator.dart';
 import 'package:provider/provider.dart';

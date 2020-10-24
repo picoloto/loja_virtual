@@ -2,7 +2,7 @@ import 'package:alphabet_list_scroll_view/alphabet_list_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/common/custom_drawer/custom_drawer.dart';
-import 'package:loja_virtual/models/user/admin_user_manager.dart';
+import 'package:loja_virtual/manager/admin_user_manager.dart';
 import 'package:provider/provider.dart';
 
 class AdminUserListScreen extends StatelessWidget {
