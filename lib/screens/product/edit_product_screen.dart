@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/common/custom_loader_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
 import 'package:loja_virtual/manager/product_manager.dart';
@@ -70,21 +69,19 @@ class EditProductScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16),
                       child: Consumer<Product>(builder: (_, product, __) {
-                        return !product.loading
-                            ? CustomRaisedButton(
-                                onPressed: () async {
-                                  if (formKey.currentState.validate()) {
-                                    formKey.currentState.save();
-                                    await product.save();
-                                    context.read<ProductManager>().update(product);
+                        return CustomRaisedButton(
+                          onPressed: () async {
+                            if (formKey.currentState.validate()) {
+                              formKey.currentState.save();
+                              await product.save();
+                              context.read<ProductManager>().update(product);
 
-                                    navigatorPop(context: context);
-                                  }
-                                },
-                                child:
-                                    const CustomTextFromRaisedButton('Salvar'),
-                              )
-                            : CustomLoaderRaisedButton();
+                              navigatorPop(context: context);
+                            }
+                          },
+                          loading: product.loading,
+                          child: const CustomTextFromRaisedButton('Salvar'),
+                        );
                       }),
                     )
                   ],

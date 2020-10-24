@@ -75,12 +75,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     CustomRaisedButton(
-                      onPressed: userManager.loading
-                          ? null
-                          : () => _login(userManager, context),
-                      child: userManager.loading
-                          ? LoadingFromButton()
-                          : const CustomTextFromRaisedButton('Entrar'),
+                      onPressed:() => _login(userManager, context),
+                      loading: userManager.loading,
+                      child: const CustomTextFromRaisedButton('Entrar'),
                     ),
                   ],
                 );

@@ -85,12 +85,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   CustomRaisedButton(
-                    onPressed: userManager.loading
-                        ? null
-                        : () => _cadastrar(userManager, context),
-                    child: userManager.loading
-                        ? LoadingFromButton()
-                        : const CustomTextFromRaisedButton('Criar Conta'),
+                    onPressed: () => _cadastrar(userManager, context),
+                    loading: userManager.loading,
+                    child: const CustomTextFromRaisedButton('Criar Conta'),
                   )
                 ],
               );

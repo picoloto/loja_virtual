@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:loja_virtual/common/custom_field_decoration.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
+import 'package:loja_virtual/common/snackbar_error.dart';
 import 'package:loja_virtual/manager/cart_manager.dart';
 import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:loja_virtual/utils/validators.dart';
@@ -15,7 +16,9 @@ class AddressInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(address.zipCode != null) {
+    final cartManager = context.watch<CartManager>();
+
+    if (address.zipCode != null && cartManager.deliveryPrice == null) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
@@ -33,8 +36,9 @@ class AddressInputField extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding:
-                    const EdgeInsets.only(top: 16, bottom: 16, right: 16),
+                        const EdgeInsets.only(top: 16, bottom: 16, right: 16),
                     child: TextFormField(
+                      enabled: !cartManager.loading,
                       initialValue: address.number,
                       validator: emptyField,
                       onSaved: (number) => address.number = number,
@@ -50,6 +54,7 @@ class AddressInputField extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: TextFormField(
+                      enabled: !cartManager.loading,
                       initialValue: address.complement,
                       onSaved: (complement) => address.complement = complement,
                       decoration: CustomFieldInputDecoration(
@@ -72,7 +77,7 @@ class AddressInputField extends StatelessWidget {
                   flex: 3,
                   child: Padding(
                     padding:
-                    const EdgeInsets.only(top: 16, bottom: 16, right: 16),
+                        const EdgeInsets.only(top: 16, bottom: 16, right: 16),
                     child: TextFormField(
                       initialValue: address.city,
                       enabled: false,
@@ -100,19 +105,24 @@ class AddressInputField extends StatelessWidget {
               ],
             ),
             CustomRaisedButton(
-              onPressed: () {
-                FormState formContext = Form.of(context);
-                if(formContext.validate()){
+              onPressed: () async {
+                final FormState formContext = Form.of(context);
+                if (formContext.validate()) {
                   formContext.save();
-                  context.read<CartManager>().setAddress(address);
+                  try {
+                    await context.read<CartManager>().setAddress(address);
+                  } catch (e) {
+                    snackBarError(context, '$e');
+                  }
                 }
               },
+              loading: cartManager.loading,
               child: const CustomTextFromRaisedButton("Calcular Frete"),
             )
           ],
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }

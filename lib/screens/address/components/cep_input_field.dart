@@ -5,6 +5,7 @@ import 'package:loja_virtual/common/app_primary_color.dart';
 import 'package:loja_virtual/common/custom_icon_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_raised_button.dart';
 import 'package:loja_virtual/common/custom_raised_button/custom_text_from_raised_button.dart';
+import 'package:loja_virtual/common/snackbar_error.dart';
 import 'package:loja_virtual/manager/cart_manager.dart';
 import 'package:loja_virtual/models/endereco/address.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,8 @@ class CepInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartManager = context.watch<CartManager>();
+
     if (address.zipCode == null) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,11 +43,16 @@ class CepInputField extends StatelessWidget {
             ),
           ),
           CustomRaisedButton(
-            onPressed: () {
+            onPressed: () async {
               if (Form.of(context).validate()) {
-                context.read<CartManager>().getAddress(cepController.text);
+                try {
+                  await context.read<CartManager>().getAddress(cepController.text);
+                } catch (e) {
+                  snackBarError(context, '$e');
+                }
               }
             },
+            loading: cartManager.loading,
             child: const CustomTextFromRaisedButton("Buscar CEP"),
           )
         ],

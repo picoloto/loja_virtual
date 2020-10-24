@@ -109,6 +109,7 @@ class ProductScreen extends StatelessWidget {
                 navigatorPush(context, LoginScreen());
               }
             },
+      loading: false,
       child: CustomTextFromRaisedButton(userManager.isLoggedIn
           ? 'ADICIONAR AO CARRINHO'
           : 'ENTRE PARA COMPRAR'),
@@ -117,6 +118,7 @@ class ProductScreen extends StatelessWidget {
 
   Widget _botaoSemEstoque() {
     return const CustomRaisedButton(
+      loading: false,
       child: CustomTextFromRaisedButton('PRODUTO SEM ESTOQUE'),
     );
   }
