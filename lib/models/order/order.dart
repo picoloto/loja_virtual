@@ -20,6 +20,19 @@ class Order {
     address = cartManager.address;
   }
 
+  Order.fromDocument(DocumentSnapshot doc) {
+    orderId = doc.documentID;
+    price = doc.data[orderPrice] as num;
+    userId = doc.data[orderUser] as String;
+    address = Address.fromMap(doc.data[orderAddress] as Map<String, dynamic>);
+    date = doc.data[orderDate] as Timestamp;
+    items = (doc.data[orderItems] as List<dynamic>)
+        .map((e) => CartProduct.fromMap(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  String get formattedId => '#${orderId.padLeft(6, '0')}';
+
   Future<void> save() async {
     firestore.collection(ordersCollection).document(orderId).setData(_toMap());
   }
@@ -31,5 +44,10 @@ class Order {
       orderUser: userId,
       orderAddress: address.toMap(),
     };
+  }
+
+  @override
+  String toString() {
+    return 'Order{orderId: $orderId, userId: $userId, price: $price, items: $items, address: $address, date: $date}\n';
   }
 }

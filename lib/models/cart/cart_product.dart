@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/product/product_version.dart';
 import 'package:loja_virtual/utils/const/cart_product_constants.dart';
+import 'package:loja_virtual/utils/const/product_constants.dart';
 
 class CartProduct extends ChangeNotifier {
   String id;
@@ -32,7 +33,18 @@ class CartProduct extends ChangeNotifier {
     quantity = document.data[cartProductQuantity] as int;
     version = document.data[cartProductVersion] as String;
 
-    firestore.document('products/$productId').get().then((value) {
+    firestore.document('$productCollection/$productId').get().then((value) {
+      product = Product.fromDocument(value);
+    });
+  }
+
+  CartProduct.fromMap(Map<String, dynamic> map) {
+    productId = map[cartProductPid] as String;
+    quantity = map[cartProductQuantity] as int;
+    version = map[cartProductVersion] as String;
+    fixedPrice = map[cartProductFixedPrice] as num;
+
+    firestore.document('$productCollection/$productId').get().then((value) {
       product = Product.fromDocument(value);
     });
   }

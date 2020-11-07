@@ -45,8 +45,10 @@ class CheckoutScreen extends StatelessWidget {
                   ));
                 },
                 onSuccess: () {
+                  // TODO CORRIGIR AQUI PQ NÃO ESTA VOLTANDO CORRETAMENTE
                   var count = 0;
                   Navigator.popUntil(context, (route) {
+                    debugPrint(route.toString());
                     return count++ == 3;
                   });
                 },

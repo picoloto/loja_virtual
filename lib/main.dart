@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/manager/admin_user_manager.dart';
 import 'package:loja_virtual/manager/cart_manager.dart';
 import 'package:loja_virtual/manager/home_manager.dart';
+import 'package:loja_virtual/manager/orders_manager.dart';
 import 'package:loja_virtual/manager/product_manager.dart';
 import 'package:loja_virtual/manager/user_manager.dart';
 import 'package:loja_virtual/screens/base/base_screen.dart';
@@ -32,6 +33,12 @@ class MyApp extends StatelessWidget {
           create: (_) => CartManager(),
           update: (_, userManager, cartManager) =>
               cartManager..updateUser(userManager),
+          lazy: false,
+        ),
+        ChangeNotifierProxyProvider<UserManager, OrdersManager>(
+          create: (_) => OrdersManager(),
+          update: (_, userManager, ordersManager) =>
+          ordersManager..updateUser(userManager.user),
           lazy: false,
         ),
         ChangeNotifierProxyProvider<UserManager, AdminUserManager>(
