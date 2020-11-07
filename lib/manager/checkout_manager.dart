@@ -1,11 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/manager/cart_manager.dart';
+import 'package:loja_virtual/models/order/order.dart';
+import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/utils/const/aux_constants.dart';
 import 'package:loja_virtual/utils/const/checkout_constants.dart';
+import 'package:loja_virtual/utils/const/product_constants.dart';
 
 class CheckoutManager extends ChangeNotifier {
   CartManager cartManager;
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value){
+      _loading = value;
+      notifyListeners();
+  }
   final Firestore firestore = Firestore.instance;
 
   // ignore: use_setters_to_change_properties
@@ -32,33 +41,65 @@ class CheckoutManager extends ChangeNotifier {
     }
   }
 
-  void checkout() {
-    _decrementStock();
+  Future<void> checkout({Function onStockFail, Function onSuccess}) async {
+    loading = true;
+    try {
+      await _decrementStock();
+    } catch (e) {
+      onStockFail(e);
+      loading = false;
+      return;
+    }
 
-    _getOrderId().then((value) => print(value));
+    // TODO PROCESSAR PAGAMENTO
+
+    final orderId = await _getOrderId();
+    final order = Order.fromCartManager(cartManager);
+    order.orderId = orderId.toString();
+
+    await order.save();
+    cartManager.clear();
+    onSuccess();
+    loading = false;
   }
 
-  void _decrementStock() {
-    // 1. Ler todos os estoques
-    // 2. Decremento localmente os estoques
-    // 3. Salvar estoques no firebase
+  Future<void> _decrementStock() {
+    return firestore.runTransaction((transaction) async {
+      final List<Product> productsToUpdate = [];
+      final List<Product> productsWithoutStock = [];
 
-    // CART ITEMS
-    // Wow  5xd 2xb   5   deluxe
-    // wow  5xd 2xb   2   basic
-    // lol  1s        1   standart
+      for (final item in cartManager.items) {
+        Product product;
 
-    // NÃO TENHO ESTOQUE
+        if (productsToUpdate.any((p) => p.id == item.productId)) {
+          product = productsToUpdate.firstWhere((p) => p.id == item.productId);
+        } else {
+          final doc = await transaction
+              .get(firestore.document('$productCollection/${item.productId}'));
+          product = Product.fromDocument(doc);
+        }
 
-    // TENHO ESTOQUE
-    // PRODUCTS TO UPDATE
-    // Wow  5xd 2xb   5   deluxe
-    // lol  1s        1   standart
+        item.product = product;
 
-    // DECREMENTAR
-    // Wow  0xd 0xb
-    // lol  0s
+        final version = product.findVersion(item.version);
+        if (version.stock - item.quantity < 0) {
+          productsWithoutStock.add(product);
+        } else {
+          version.stock -= item.quantity;
+          productsToUpdate.add(product);
+        }
+      }
 
-    // ESCREVER NO FIREBASE
+      if (productsWithoutStock.isNotEmpty) {
+        return Future.error(
+            '${productsWithoutStock.length} produto(s) sem estoque');
+      }
+
+      for (final product in productsToUpdate) {
+        transaction.update(
+            firestore.document('$productCollection/${product.id}'),
+            {productVersions: product.versionMapFromList()});
+      }
+    });
   }
 }
