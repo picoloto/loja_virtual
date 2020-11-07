@@ -2,20 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/product/product.dart';
 import 'package:loja_virtual/models/product/product_version.dart';
-
-const modelPid = 'pid';
-const modelQuantity = 'quantity';
-const modelVersion = 'version';
+import 'package:loja_virtual/utils/const/cart_product_constants.dart';
 
 class CartProduct extends ChangeNotifier {
   String id;
   String productId;
   int quantity;
   String version;
-  Product product;
+  Product _product;
+  num fixedPrice;
   final Firestore firestore = Firestore.instance;
 
-  CartProduct.fromProduct(this.product) {
+  Product get product => _product;
+
+  set product(Product value) {
+    _product = value;
+    notifyListeners();
+  }
+
+  CartProduct.fromProduct(this._product) {
     productId = product.id;
     quantity = 1;
     version = product.selectedVersion.name;
@@ -23,13 +28,12 @@ class CartProduct extends ChangeNotifier {
 
   CartProduct.fromDocument(DocumentSnapshot document) {
     id = document.documentID;
-    productId = document.data[modelPid] as String;
-    quantity = document.data[modelQuantity] as int;
-    version = document.data[modelVersion] as String;
+    productId = document.data[cartProductPid] as String;
+    quantity = document.data[cartProductQuantity] as int;
+    version = document.data[cartProductVersion] as String;
 
     firestore.document('products/$productId').get().then((value) {
       product = Product.fromDocument(value);
-      notifyListeners();
     });
   }
 
@@ -45,9 +49,9 @@ class CartProduct extends ChangeNotifier {
 
   Map<String, dynamic> toCartItemMap() {
     final Map<String, dynamic> map = {
-      modelPid: productId,
-      modelQuantity: quantity,
-      modelVersion: version,
+      cartProductPid: productId,
+      cartProductQuantity: quantity,
+      cartProductVersion: version,
     };
     return map;
   }
@@ -75,4 +79,13 @@ class CartProduct extends ChangeNotifier {
   }
 
   num get totalPrice => unitPrice * quantity;
+
+  Map<String, dynamic> toOrderItemMap() {
+    return {
+      cartProductPid: productId,
+      cartProductQuantity: quantity,
+      cartProductVersion: version,
+      cartProductFixedPrice: fixedPrice ?? unitPrice,
+    };
+  }
 }
